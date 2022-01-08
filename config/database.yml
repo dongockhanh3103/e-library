@@ -1,0 +1,18 @@
+default: &default
+  adapter:  postgresql
+  encoding: unicode
+  host:     localhost
+  username: postgres
+  password: root
+
+development:
+  <<: *default
+  database: e_learning
+
+test:
+  <<: *default
+  database: e_learning_test
+
+production:
+  <<: *default
+  database: <%= ENV['DATABASE_URL'] %>

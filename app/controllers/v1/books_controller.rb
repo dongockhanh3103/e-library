@@ -1,0 +1,1 @@
+class V1::BooksController < ::BooksController;end

@@ -1,0 +1,1 @@
+class V1::LabelsController < ::LabelsController;end
