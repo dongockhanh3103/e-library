@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SongResource < JSONAPI::Resource
+
   ATTRIBUTES = %i[
     name
     description
@@ -10,4 +11,5 @@ class SongResource < JSONAPI::Resource
   ].freeze
 
   attributes(*ATTRIBUTES)
+
 end

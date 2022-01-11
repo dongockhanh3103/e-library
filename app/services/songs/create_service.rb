@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 module Songs
+  # Create new Song with label
   class CreateService < BaseService
-    def initialize(params = {})
+
+    def initialize(params = { })
+      super()
       @params = params
     end
 
@@ -12,7 +15,7 @@ module Songs
       if song.errors.any?
         return OpenStruct.new(
           success: false,
-          record: song
+          record:  song
         )
       elsif @params[:label_id].present?
         SongsLabel.create!(source_id: song.id, label_id: @params[:label_id])
@@ -20,5 +23,6 @@ module Songs
 
       OpenStruct.new(success: true, record: song)
     end
+
   end
 end

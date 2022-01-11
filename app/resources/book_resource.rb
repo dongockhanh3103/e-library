@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BookResource < JSONAPI::Resource
+
   ATTRIBUTES = %i[
     name
     description
@@ -10,4 +11,5 @@ class BookResource < JSONAPI::Resource
   ].freeze
 
   attributes(*ATTRIBUTES)
+
 end

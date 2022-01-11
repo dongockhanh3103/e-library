@@ -2,7 +2,8 @@
 
 module Combos
   class CreateService < BaseService
-    def initialize(params = {})
+
+    def initialize(params = { })
       @params = params
     end
 
@@ -12,7 +13,7 @@ module Combos
       if combo.errors.any?
         return OpenStruct.new(
           success: false,
-          record: combo
+          record:  combo
         )
       elsif @params[:label_id].present?
         CombosLabel.create!(source_id: combo.id, label_id: @params[:label_id])
@@ -20,5 +21,6 @@ module Combos
 
       OpenStruct.new(success: true, record: combo)
     end
+
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe BooksController.class.name, type: :request do
@@ -17,7 +19,7 @@ describe BooksController.class.name, type: :request do
   context 'when get book successfully' do
     it 'with existing book' do
       get "/v1/books/#{books.first.id}"
-    
+
       body = JSON.parse(response.body)
       book = books.first
       expect(response).to have_http_status(:success)
@@ -33,7 +35,7 @@ describe BooksController.class.name, type: :request do
       {
         data: {
           attributes: {
-            name: name_failure ,
+            name: name_failure,
             description: Faker::Lorem.sentence,
             label_id: label.id
           }

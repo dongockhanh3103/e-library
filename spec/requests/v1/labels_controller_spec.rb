@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe LabelsController.class.name, type: :request do
@@ -16,7 +18,7 @@ describe LabelsController.class.name, type: :request do
   context 'when get label successfully' do
     it 'with existing label' do
       get "/v1/labels/#{labels.first.id}"
-    
+
       body = JSON.parse(response.body)
       label = labels.first
       expect(response).to have_http_status(:success)

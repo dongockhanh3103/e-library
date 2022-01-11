@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module JsonApiRenderer
-  def jsonapi_render(json:, resource_class:, status: nil, options: {})
+
+  def jsonapi_render(json:, resource_class:, status: nil, options: { })
     body = json.nil? ? { data: nil } : jsonapi_format(json, options, resource_class)
     render json: body, status: (status || :ok)
   rescue StandardError => e
@@ -20,28 +21,29 @@ module JsonApiRenderer
   private
 
   def jsonapi_format(object, options, resource_class)
-    opts = @params_parser ? apply_params_parser : {}
+    opts = @params_parser ? apply_params_parser : { }
     opts.merge!(opts)
 
     serializer = JSONAPI::ResourceSerializer.new(resource_class, opts)
     resource = if object.respond_to?(:to_ary)
                  object.map do |obj|
-                   resource_class.new(obj, {})
+                   resource_class.new(obj, { })
                  end
                else
-                 resource_class.new(object, {})
+                 resource_class.new(object, { })
                end
 
     result = serializer.serialize_to_hash(resource)
 
-    result.merge!(meta: options[:top_level_meta]) if options[:top_level_meta].present?
+    result[:meta] = options[:top_level_meta] if options[:top_level_meta].present?
 
     result
   end
 
   def error_sanitize(errors)
     Array(errors).map do |error|
-      %i[title detail id code source links status meta].reduce({}) do |sum, key|
+      # rubocop:disable Performance/CollectionLiteralInLoop
+      %i[title detail id code source links status meta].reduce({ }) do |sum, key|
         value = error.try(key) || error.try(:[], key)
         if value.nil?
           sum
@@ -51,6 +53,7 @@ module JsonApiRenderer
         end
       end
     end
+    # rubocop:enable Performance/CollectionLiteralInLoop
   end
 
   def format_active_model_errors(errors, object_name, http_status: 422)
@@ -58,9 +61,9 @@ module JsonApiRenderer
 
     errors.map do |error_key, error_message|
       {
-        title: error_message,
+        title:  error_message,
         detail: error_message,
-        code: "#{object_name}##{error_key}",
+        code:   "#{object_name}##{error_key}",
         source: {
           pointer: "#{controller_path}/#{action_name}"
         },
@@ -68,4 +71,5 @@ module JsonApiRenderer
       }
     end
   end
+
 end

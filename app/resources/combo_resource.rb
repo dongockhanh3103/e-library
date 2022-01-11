@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ComboResource < JSONAPI::Resource
+
   ATTRIBUTES = %i[
     book
     song
@@ -10,4 +11,5 @@ class ComboResource < JSONAPI::Resource
   ].freeze
 
   attributes(*ATTRIBUTES)
+
 end

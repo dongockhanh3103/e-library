@@ -11,5 +11,7 @@
 #  updated_at  :datetime         not null
 #
 class Label < ApplicationRecord
+
   include LibraryValidation
+
 end

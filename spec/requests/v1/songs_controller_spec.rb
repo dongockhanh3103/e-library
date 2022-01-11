@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe SongsController.class.name, type: :request do
@@ -16,7 +18,7 @@ describe SongsController.class.name, type: :request do
   context 'when get song successfully' do
     it 'with existing song' do
       get "/v1/songs/#{songs.first.id}"
-    
+
       body = JSON.parse(response.body)
       song = songs.first
       expect(response).to have_http_status(:success)
@@ -32,7 +34,7 @@ describe SongsController.class.name, type: :request do
       {
         data: {
           attributes: {
-            name: name_failure ,
+            name: name_failure,
             description: Faker::Lorem.sentence,
             label_id: label.id
           }

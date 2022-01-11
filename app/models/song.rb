@@ -11,7 +11,9 @@
 #  updated_at  :datetime         not null
 #
 class Song < ApplicationRecord
+
   include LibraryValidation
 
   belongs_to :label
+
 end

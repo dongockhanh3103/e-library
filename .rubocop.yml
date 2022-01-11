@@ -159,9 +159,24 @@ Style/ClassMethods:
 Style/ClassVars:
   Enabled: false
 
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+  RequireForNonPublicMethods: false
+  Exclude:
+    - '**/spec/**/*.rb'
+
 Style/For:
   Enabled: true
   EnforcedStyle: each
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+  Include:
+    - 'app/**/*.rb'
 
 Style/IfUnlessModifier:
   Enabled: true
@@ -353,7 +368,7 @@ Layout/TrailingEmptyLines:
 
 Layout/LineLength:
   Enabled: true
-  Max: 120
+  Max: 100
 ################### Linting #####################
 
 # Enable all linting options by default
@@ -370,6 +385,11 @@ Lint/MissingSuper:
 Metrics/AbcSize:
   Enabled: true
   Max: 50
+
+Metrics/BlockLength:
+  Enabled: false
+  Max: 40
+  CountComments: false
 
 Metrics/BlockNesting:
   Enabled: true

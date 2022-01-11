@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ActsResource
+
   extend ActiveSupport::Concern
   SIZE_DEFAULT = 20
   PAGE_NUMBER_DEFAULT = 1
@@ -24,7 +25,9 @@ module ActsResource
   private
 
   def get_resource!
-    @resource_client = @resource_client.includes(includes_attributes) if includes_attributes.present?
+    if includes_attributes.present?
+      @resource_client = @resource_client.includes(includes_attributes)
+    end
     @resource ||= @resource_client.find(params[:id])
   end
 
@@ -32,30 +35,32 @@ module ActsResource
     @resources ||= query_with_parser(parse_params)
   end
 
-  def query_with_parser(parse_params = {})
+  def query_with_parser(parse_params = { })
     filters = parse_params.fetch(:filters)
     paginator = parse_params.fetch(:paginator)
     sort_criterias = parse_params.fetch(:sort_criterias)
     query_builder = @resource_client
     query_builder = query_builder.includes(includes_attributes) if includes_attributes.present?
-
     query_builder = query_builder.where(filters) if filters.present?
-    query_builder = query_builder.offset(paginator.offset).limit(paginator.limit) if paginator.present?
+    query_builder = query_builder.order(sort_criterias) if sort_criterias.present?
+
+    if paginator.present?
+      query_builder = query_builder.offset(paginator.offset).limit(paginator.limit)
+    end
 
     query_builder.all
   end
 
   def parse_params
     @parse_params ||= {
-      filters: parse_filters_params,
-      paginator: parse_paginator_params,
+      filters:        parse_filters_params,
+      paginator:      parse_paginator_params,
       sort_criterias: parse_sorts_params
     }
   end
 
   def parse_paginator_params
-    result = {}
-    paginator = jsonapi_get_params[:page] || {}
+    paginator = jsonapi_get_params[:page] || { }
 
     limit = paginator[:size] || SIZE_DEFAULT
     page = paginator[:number] || PAGE_NUMBER_DEFAULT
@@ -63,7 +68,7 @@ module ActsResource
     OpenStruct.new(
       {
         offset: (page.to_i - 1) * limit.to_i,
-        limit: limit.to_i
+        limit:  limit.to_i
       }
     )
   end
@@ -74,7 +79,7 @@ module ActsResource
   end
 
   def parse_filters_params
-    result = {}
+    result = { }
     jsonapi_get_params[:filter].to_h.each do |key, value|
       result[key] = value
     end
@@ -86,7 +91,7 @@ module ActsResource
     @jsonapi_get_params ||= params.except(:format).permit(
       :sort,
       filter: filter_attributes,
-      page: %i[
+      page:   %i[
         size
         number
       ]
@@ -106,15 +111,17 @@ module ActsResource
   end
 
   def set_resource_client
+    # rubocop:disable Style/ImplicitRuntimeError
     raise 'Method not implemented'
   end
 
   def set_resource_class
     raise 'Method not implemented'
+    # rubocop:enable Style/ImplicitRuntimeError
   end
 
   def convert_to_ordered_hash(fields)
-    fields.each_with_object({}) do |field, hash|
+    fields.each_with_object({ }) do |field, hash|
       direction = :asc
       if field.start_with?('-')
         field = field[1..].to_sym
@@ -123,4 +130,5 @@ module ActsResource
       hash[field] = direction if sort_criteria.include?(field.to_sym)
     end
   end
+
 end

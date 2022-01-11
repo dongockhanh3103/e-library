@@ -12,6 +12,7 @@
 #  updated_at :datetime         not null
 #
 class ItemsLabel < ApplicationRecord
+
   after_create :clear_most_popular_cached
 
   validates :source_id, uniqueness: { scope: :type }
@@ -19,4 +20,5 @@ class ItemsLabel < ApplicationRecord
   def clear_most_popular_cached
     Rails.cache.delete(:most_popular_labels)
   end
+
 end

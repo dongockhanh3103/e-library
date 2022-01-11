@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :combos, only: %i[index show create]
     resources :labels, only: %i[index show] do
       get :most_popular, on: :collection
+      get :search, on: :collection
     end
   end
 end

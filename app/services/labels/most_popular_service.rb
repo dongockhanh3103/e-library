@@ -2,6 +2,7 @@
 
 module Labels
   class MostPopularService < BaseService
+
     MOST_POPULAR_NUMBER = 10
 
     def execute
@@ -13,9 +14,10 @@ module Labels
     private
 
     def most_popular_label_ids
-      @popular_item_ids ||= ItemsLabel.group(:label_id)
-                                      .order(count_id: :desc)
-                                      .count(:id).keys.first(MOST_POPULAR_NUMBER)
+      @popular_item_ids ||= ItemsLabel.group(:label_id).
+                                      order(count_id: :desc).
+                                      count(:id).keys.first(MOST_POPULAR_NUMBER)
     end
+
   end
 end

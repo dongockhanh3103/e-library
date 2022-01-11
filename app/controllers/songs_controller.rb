@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class SongsController < ApplicationController
+
   include ActsResource
 
   def create
     result = Songs::CreateService.execute(permitted_create_params)
 
-    jsonapi_render json: result.record, resource_class: @resource_class and return if result.success
+    jsonapi_render(json:           result.record,
+                   resource_class: @resource_class) && return if result.success
 
     render_jsonapi_error(result.record, http_status: 422)
   end
@@ -36,4 +38,5 @@ class SongsController < ApplicationController
       :label_id
     )
   end
+
 end

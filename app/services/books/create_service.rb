@@ -2,7 +2,8 @@
 
 module Books
   class CreateService < BaseService
-    def initialize(params = {})
+
+    def initialize(params = { })
       @params = params
     end
 
@@ -12,7 +13,7 @@ module Books
       if book.errors.any?
         return OpenStruct.new(
           success: false,
-          record: book
+          record:  book
         )
       elsif @params[:label_id].present?
         BooksLabel.create!(source_id: book.id, label_id: @params[:label_id])
@@ -20,5 +21,6 @@ module Books
 
       OpenStruct.new(success: true, record: book)
     end
+
   end
 end
