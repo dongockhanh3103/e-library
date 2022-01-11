@@ -71,4 +71,5 @@ module JsonApiRenderer
       }
     end
   end
+
 end
