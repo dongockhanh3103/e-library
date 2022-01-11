@@ -16,6 +16,7 @@ module ELibrary
     config.autoload_paths += [
       "#{app}/presenters"
     ]
+    config.assets.initialize_on_precompile = false
 
     # Configuration for the application, engines, and railties goes here.
     #
