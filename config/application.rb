@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -14,10 +16,6 @@ module ELibrary
     config.autoload_paths += [
       "#{app}/presenters"
     ]
-
-    config.api_only = true
-    config.debug_exception_response_format = :default
-    config.debug_exception_response_format = :api
 
     # Configuration for the application, engines, and railties goes here.
     #

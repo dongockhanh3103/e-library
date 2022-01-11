@@ -24,6 +24,7 @@ module ActsResource
   private
 
   def get_resource!
+    @resource_client = @resource_client.includes(includes_attributes) if includes_attributes.present?
     @resource ||= @resource_client.find(params[:id])
   end
 
@@ -35,8 +36,8 @@ module ActsResource
     filters = parse_params.fetch(:filters)
     paginator = parse_params.fetch(:paginator)
     sort_criterias = parse_params.fetch(:sort_criterias)
-
     query_builder = @resource_client
+    query_builder = query_builder.includes(includes_attributes) if includes_attributes.present?
 
     query_builder = query_builder.where(filters) if filters.present?
     query_builder = query_builder.offset(paginator.offset).limit(paginator.limit) if paginator.present?
@@ -100,6 +101,10 @@ module ActsResource
     []
   end
 
+  def includes_attributes
+    nil
+  end
+
   def set_resource_client
     raise 'Method not implemented'
   end
@@ -112,7 +117,7 @@ module ActsResource
     fields.each_with_object({}) do |field, hash|
       direction = :asc
       if field.start_with?('-')
-        field = field[1..-1].to_sym
+        field = field[1..].to_sym
         direction = :desc
       end
       hash[field] = direction if sort_criteria.include?(field.to_sym)

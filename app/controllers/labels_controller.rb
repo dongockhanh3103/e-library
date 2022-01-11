@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class LabelsController < ApplicationController
   include ActsResource
 
   def most_popular
-    jsonapi_render(json: MostPopularLabelsService.execute, resource_class: @resource_class)
+    jsonapi_render(json: Labels::MostPopularService.execute, resource_class: @resource_class)
   end
 
   private

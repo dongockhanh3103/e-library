@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: combos
@@ -9,4 +11,7 @@
 #  updated_at :datetime         not null
 #
 class Combo < ApplicationRecord
+  belongs_to :book
+  belongs_to :song
+  belongs_to :label
 end

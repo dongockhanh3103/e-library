@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LibraryValidation
   extend ActiveSupport::Concern
   include ActiveModel::Validations

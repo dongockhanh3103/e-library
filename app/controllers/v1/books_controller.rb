@@ -1,1 +1,5 @@
-class V1::BooksController < ::BooksController;end
+# frozen_string_literal: true
+
+module V1
+  class BooksController < ::BooksController; end
+end

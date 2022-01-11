@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: books
@@ -10,4 +12,6 @@
 #
 class Book < ApplicationRecord
   include LibraryValidation
+
+  belongs_to :label
 end

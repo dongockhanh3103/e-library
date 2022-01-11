@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 JSONAPI.configure do |config|
   # https://jsonapi-resources.com/v0.10/guide/configuration.html
   config.json_key_format = :underscored_key

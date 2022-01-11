@@ -1,9 +1,21 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
   include ActsResource
 
-  def create; end
+  def create
+    result = Books::CreateService.execute(permitted_create_params)
+
+    jsonapi_render json: result.record, resource_class: @resource_class and return if result.success
+
+    render_jsonapi_error(result.record, http_status: 422)
+  end
 
   private
+
+  def includes_attributes
+    :label
+  end
 
   def set_resource_client
     @resource_client ||= Book
