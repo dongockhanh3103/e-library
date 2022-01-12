@@ -6,6 +6,7 @@ Go to: http://yojee-e-library.herokuapp.com/
 - Database: PostgreSql
 - Rails version: 6.1.3
 - Ruby version: 3.0.3
+- Front-end Framework: React JS
 
 ## Feature
 - [X] Create Book, Song, Combo
