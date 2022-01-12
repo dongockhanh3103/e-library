@@ -23,6 +23,9 @@ Go to: http://yojee-e-library.herokuapp.com/
 | Create Book         | /v1/combos  | POST  | book_id, label_id, song_id |   |
 | Most Popular Labels         | /v1/labels  | GET  | |   |
 | Search Labels         | /v1/labels/search  | GET  | term, search_by |   |
+| List book         | /v1/books  | GET  |  |   |
+| List song         | /v1/songs  | GET  |  |   |
+| List combos         | /v1/combos  | GET  |  |   |
 
 ## Unit Test
   - [X] Service
