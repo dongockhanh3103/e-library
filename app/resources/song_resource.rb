@@ -3,6 +3,7 @@
 class SongResource < JSONAPI::Resource
 
   ATTRIBUTES = %i[
+    id
     name
     description
     created_at

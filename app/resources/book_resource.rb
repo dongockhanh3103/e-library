@@ -3,6 +3,7 @@
 class BookResource < JSONAPI::Resource
 
   ATTRIBUTES = %i[
+    id
     name
     description
     created_at

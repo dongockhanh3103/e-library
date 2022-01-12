@@ -19,7 +19,7 @@ module Labels
       else
         klass = @search_by.classify.constantize
 
-        klass.includes(:label).where('lower(name)': @term.downcase).first&.label
+        klass.includes(:label).where('lower(name) = ?', @term.downcase).first&.label
       end
     end
 

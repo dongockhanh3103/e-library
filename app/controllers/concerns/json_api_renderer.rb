@@ -43,7 +43,7 @@ module JsonApiRenderer
   def error_sanitize(errors)
     Array(errors).map do |error|
       # rubocop:disable Performance/CollectionLiteralInLoop
-      %i[title detail id code source links status meta].reduce({ }) do |sum, key|
+      %i[title detail code source links status meta].reduce({ }) do |sum, key|
         value = error.try(key) || error.try(:[], key)
         if value.nil?
           sum

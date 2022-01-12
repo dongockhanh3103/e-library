@@ -3,6 +3,7 @@
 class ComboResource < JSONAPI::Resource
 
   ATTRIBUTES = %i[
+    id
     book
     song
     label
