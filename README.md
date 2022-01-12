@@ -1,24 +1,36 @@
-# README
+# OIVAN
+Oivan Assignment
+## Usage
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Go to: http://yojee-e-library.herokuapp.com/
+- Database: PostgreSql
+- Rails version: 6.1.3
+- Ruby version: 3.0.3
 
-Things you may want to cover:
+## Feature
+- [X] Create Book, Song, Combo
+- [X] Search Label by Book, Song, Combo name
+- [X] List Book, Song, Combo, Label
+- [X] Most Popular Labels
 
-* Ruby version
+3. API
 
-* System dependencies
+| Feature       | API           | Method        | Params        | Headers       |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| Create Book         | /v1/books  | POST  | name, description, label_id |   |
+| Create Song         | /v1/songs  | POST  | name, description, label_id |   |
+| Create Book         | /v1/combos  | POST  | book_id, label_id, song_id |   |
+| Most Popular Labels         | /v1/labels  | GET  | |   |
+| Searcg Labels         | /v1/labels/search  | GET  | term, search_by |   |
 
-* Configuration
+## Unit Test
+  - [X] Service
+  - [X] Request
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Best practices
+  - [X] Rubocop
+  - [X] Unit Test
+## Devops
+  - [X] Auto run Rubocop after create PR on Github Action
+  - [X] Auto run Unit Test after create PR on Github Action
+  - [X] Go live application to Heroku
