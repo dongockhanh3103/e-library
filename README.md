@@ -1,4 +1,4 @@
-# OIVAN
+# YOJEE
 Oivan Assignment
 ## Usage
 
@@ -21,7 +21,7 @@ Go to: http://yojee-e-library.herokuapp.com/
 | Create Song         | /v1/songs  | POST  | name, description, label_id |   |
 | Create Book         | /v1/combos  | POST  | book_id, label_id, song_id |   |
 | Most Popular Labels         | /v1/labels  | GET  | |   |
-| Searcg Labels         | /v1/labels/search  | GET  | term, search_by |   |
+| Search Labels         | /v1/labels/search  | GET  | term, search_by |   |
 
 ## Unit Test
   - [X] Service
